@@ -282,5 +282,144 @@ TIE_BREAKER_QUESTIONS = [
       "A": {"text": "Persuading others and directing actions", "riasec": "E"},
       "B": {"text": "Organizing and maintaining detailed systems", "riasec": "C"}
     }
+  },
+
+  
+  {
+    "number": 61,
+    "pair": "R-I",
+    "question": "Which task would you enjoy more?",
+    "options": {
+      "A": {"text": "Fixing a device by understanding its physical parts", "riasec": "R"},
+      "B": {"text": "Examining information to identify a hidden issue", "riasec": "I"}
+    }
+  },
+  {
+    "number": 62,
+    "pair": "R-A",
+    "question": "Which activity sounds more appealing?",
+    "options": {
+      "A": {"text": "Constructing or adjusting mechanical items", "riasec": "R"},
+      "B": {"text": "Creating visually appealing artwork or designs", "riasec": "A"}
+    }
+  },
+  {
+    "number": 63,
+    "pair": "R-S",
+    "question": "Which task fits you better?",
+    "options": {
+      "A": {"text": "Working independently on practical tasks", "riasec": "R"},
+      "B": {"text": "Assisting people with hands-on help or support", "riasec": "S"}
+    }
+  },
+  {
+    "number": 64,
+    "pair": "R-E",
+    "question": "Which situation would you prefer?",
+    "options": {
+      "A": {"text": "Solving a problem using tools or equipment", "riasec": "R"},
+      "B": {"text": "Taking initiative to guide a group toward a goal", "riasec": "E"}
+    }
+  },
+  {
+    "number": 65,
+    "pair": "R-C",
+    "question": "Which option appeals more?",
+    "options": {
+      "A": {"text": "Completing structured hands-on tasks", "riasec": "R"},
+      "B": {"text": "Working with organized systems or records", "riasec": "C"}
+    }
+  },
+  {
+    "number": 66,
+    "pair": "I-A",
+    "question": "What interests you more?",
+    "options": {
+      "A": {"text": "Exploring scientific concepts through study or analysis", "riasec": "I"},
+      "B": {"text": "Expressing ideas by designing creative work", "riasec": "A"}
+    }
+  },
+  {
+    "number": 67,
+    "pair": "I-S",
+    "question": "Which activity feels more meaningful?",
+    "options": {
+      "A": {"text": "Investigating complex topics in depth", "riasec": "I"},
+      "B": {"text": "Guiding or supporting individuals through understanding", "riasec": "S"}
+    }
+  },
+  {
+    "number": 68,
+    "pair": "I-E",
+    "question": "Which do you enjoy more?",
+    "options": {
+      "A": {"text": "Discovering insights from data or research", "riasec": "I"},
+      "B": {"text": "Presenting ideas confidently to influence others", "riasec": "E"}
+    }
+  },
+  {
+    "number": 69,
+    "pair": "I-C",
+    "question": "Which task fits you better?",
+    "options": {
+      "A": {"text": "Examining technical or scientific material", "riasec": "I"},
+      "B": {"text": "Keeping information organized and accurate", "riasec": "C"}
+    }
+  },
+  {
+    "number": 70,
+    "pair": "A-S",
+    "question": "Which role do you relate to more?",
+    "options": {
+      "A": {"text": "Using creativity to express ideas", "riasec": "A"},
+      "B": {"text": "Helping people with personal growth", "riasec": "S"}
+    }
+  },
+  {
+    "number": 71,
+    "pair": "A-E",
+    "question": "What suits you better?",
+    "options": {
+      "A": {"text": "Developing original concepts or works", "riasec": "A"},
+      "B": {"text": "Motivating teams toward shared goals", "riasec": "E"}
+    }
+  },
+  {
+    "number": 72,
+    "pair": "A-C",
+    "question": "Which appeals more to you?",
+    "options": {
+      "A": {"text": "Crafting imaginative or expressive creations", "riasec": "A"},
+      "B": {"text": "Organizing tasks with structure and precision", "riasec": "C"}
+    }
+  },
+  {
+    "number": 73,
+    "pair": "S-E",
+    "question": "Which situation sounds better?",
+    "options": {
+      "A": {"text": "Supporting individuals by understanding their needs", "riasec": "S"},
+      "B": {"text": "Persuading or inspiring others to take action", "riasec": "E"}
+    }
+  },
+  {
+    "number": 74,
+    "pair": "S-C",
+    "question": "What type of role would you choose?",
+    "options": {
+      "A": {"text": "Working closely with people to offer help", "riasec": "S"},
+      "B": {"text": "Maintaining structured information or systems", "riasec": "C"}
+    }
+  },
+  {
+    "number": 75,
+    "pair": "E-C",
+    "question": "Which activity describes you more?",
+    "options": {
+      "A": {"text": "Leading plans and influencing team decisions", "riasec": "E"},
+      "B": {"text": "Organizing workflows and keeping processes clear", "riasec": "C"}
+    }
   }
+
+
 ]

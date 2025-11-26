@@ -9,7 +9,7 @@ class Config:
     DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
     
     # Tie-breaker configuration
-    TIE_BREAKER_DELTA = int(os.environ.get('TIE_BREAKER_DELTA', 2))
+    TIE_BREAKER_DELTA = int(os.environ.get('TIE_BREAKER_DELTA', 1))
     
     # Session configuration
     SESSION_PERMANENT = False

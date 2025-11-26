@@ -200,6 +200,101 @@
             display: inline-block;
             margin-bottom: 10px;
         }
+
+        .live-scores-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .scores-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .scores-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .score-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgb(40, 26, 26);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .score-item.top-three {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .score-code {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        .loading-scores {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .current-code {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .code-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: rgb(28, 20, 20);
+            letter-spacing: 2px;
+        }
+
+        .code-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            color: rgb(35, 6, 6);
+        }
+
+        @keyframes scoreUpdate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .score-item.updated {
+            animation: scoreUpdate 0.5s ease;
+        }
+
+        .tie-breaker-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: white;
+        }
         
         @media (max-width: 768px) {
             .question-content {
@@ -212,6 +307,15 @@
             
             .option-text {
                 font-size: 1rem;
+            }
+            
+            .scores-container {
+                gap: 5px;
+            }
+            
+            .score-item {
+                padding: 6px 10px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -228,6 +332,19 @@
             </div>
             {% if phase == "tie_breaker" %}
             <div class="phase-indicator">Tie-Breaker Questions</div>
+            {% endif %}
+        </div>
+
+        <!-- Live Scores Panel -->
+        <div class="live-scores-panel" id="liveScoresPanel">
+            <div class="scores-title">Current RIASEC Scores</div>
+            <div class="scores-container" id="scoresContainer">
+                <div class="loading-scores">Loading scores...</div>
+            </div>
+            {% if phase == "tie_breaker" %}
+            <div class="tie-breaker-info">
+                Resolving close scores between pairs
+            </div>
             {% endif %}
         </div>
         
@@ -256,6 +373,57 @@
     <script>
         let currentQuestionNumber = {{ question.number }};
         
+        // Function to fetch and display live scores
+        function updateLiveScores() {
+            fetch('/get_current_scores')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching scores:', data.error);
+                        return;
+                    }
+
+                    const container = document.getElementById('scoresContainer');
+                    
+                    // Create scores display
+                    let scoresHTML = '';
+                    
+                    // Display individual scores
+                    Object.entries(data.riasec_scores).forEach(([code, score]) => {
+                        const isTopThree = data.top_riasec.some(item => item[0] === code);
+                        const scoreClass = isTopThree ? 'score-item top-three' : 'score-item';
+                        
+                        scoresHTML += `
+                            <div class="${scoreClass}">
+                                <span class="score-code">${code}</span>
+                                <span class="score-value">${score}</span>
+                            </div>
+                        `;
+                    });
+
+                    // Add current RIASEC code
+                    scoresHTML += `
+                        <div class="current-code">
+                            <div class="code-label">Current Code</div>
+                            <div class="code-display">${data.riasec_code}</div>
+                        </div>
+                    `;
+
+                    container.innerHTML = scoresHTML;
+                    
+                    // Add animation to updated scores
+                    container.querySelectorAll('.score-item').forEach(item => {
+                        item.classList.add('updated');
+                        setTimeout(() => {
+                            item.classList.remove('updated');
+                        }, 500);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching scores:', error);
+                });
+        }
+
         function selectOption(answer, riasec) {
             // Show loading overlay
             const loadingOverlay = document.getElementById('loadingOverlay');
@@ -281,10 +449,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Redirect to next question
-                    window.location.href = data.redirect;
+                    // Update scores before redirecting
+                    updateLiveScores();
+                    // Small delay to show updated scores
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 500);
                 } else {
-                    // Handle error
                     loadingOverlay.style.display = 'none';
                     alert('Error saving answer. Please try again.');
                 }
@@ -297,13 +468,22 @@
         
         // Add keyboard shortcuts
         document.addEventListener('keydown', function(event) {
-            if (event.key >= '1' && event.key <= '2') {
+            if (event.key >= '1' && event.key <= '9') {
                 const options = document.querySelectorAll('.option-card');
                 const index = parseInt(event.key) - 1;
                 if (options[index]) {
                     options[index].click();
                 }
             }
+        });
+
+        // Load scores when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial scores load
+            updateLiveScores();
+            
+            // Update scores every 2 seconds for real-time feel
+            setInterval(updateLiveScores, 2000);
         });
     </script>
 </body>
