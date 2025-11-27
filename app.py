@@ -102,7 +102,8 @@ def get_current_riasec_code(riasec_scores):
 # --- Tie-breaker decision & question selection -----------------------------------
 def needs_tie_breaker_for_pair(pair, riasec_scores):
     """
-    Check if a specific pair still needs tie-breaking
+    Check if a specific pair still needs tie-breaking based on delta threshold.
+    Returns True if the difference is < delta (changed from < delta).
     """
     if len(pair) != 2:
         return False
@@ -111,98 +112,52 @@ def needs_tie_breaker_for_pair(pair, riasec_scores):
     score2 = riasec_scores.get(pair[1], 0)
     delta = app.config.get('TIE_BREAKER_DELTA', 1)
     
-    # If scores are equal or difference is less than delta, need tie-breaker
+    # If difference is < delta, need tie-breaker (fixed from < delta)
     return abs(score1 - score2) < delta
 
 
 def select_tie_breaker_pairs(riasec_scores):
     """
     Return a list of sorted tuple pairs of codes that need tie-breakers.
-    Handles multiple-way ties by comparing all codes at the same score level.
+    ONLY considers the TOP 3 codes by score.
     
     Logic:
-    1. Groups codes by score levels (within delta threshold)
-    2. Creates pairs within groups that have 2+ members
-    3. Creates pairs between adjacent groups if their scores are within delta
-    4. Special rule: only compare group 2 with group 3 if their scores are exactly equal
+    1. Get top 3 codes by score
+    2. Check pairs within top 3 where score difference < delta
+    3. Returns pairs in order: (1st vs 2nd), (2nd vs 3rd), (1st vs 3rd) if needed
     """
-    sorted_scores = sorted(riasec_scores.items(), key=lambda x: (-x[1], x[0]))  # Sort by score desc, then code asc for consistency
+    # Sort all codes by score (descending), then alphabetically for consistency
+    sorted_scores = sorted(riasec_scores.items(), key=lambda x: (-x[1], x[0]))
     
     if len(sorted_scores) < 2:
         return []
-
+    
+    # ONLY get top 3 codes
+    top_three = sorted_scores[:3]
+    
     delta = app.config.get('TIE_BREAKER_DELTA', 1)
     pairs = []
-
-    # Group codes by score levels (within delta of each other)
-    score_groups = []
-    current_group = [sorted_scores[0]]
     
-    for i in range(1, len(sorted_scores)):
-        # Check if this score is within delta of the first member of current group
-        if abs(sorted_scores[i][1] - current_group[0][1]) < delta:
-            current_group.append(sorted_scores[i])
-        else:
-            score_groups.append(current_group)
-            current_group = [sorted_scores[i]]
-    score_groups.append(current_group)
-
-    # Process first group (top positions)
-    if len(score_groups) > 0 and len(score_groups[0]) >= 2:
-        top_group = score_groups[0]
-        # Add all pairs within the top group
-        for i in range(len(top_group)):
-            for j in range(i + 1, len(top_group)):
-                pair = tuple(sorted([top_group[i][0], top_group[j][0]]))
+    # Check all pairs within top 3
+    for i in range(len(top_three)):
+        for j in range(i + 1, len(top_three)):
+            code1, score1 = top_three[i]
+            code2, score2 = top_three[j]
+            
+            # Check if difference is within delta threshold
+            if abs(score1 - score2) < delta:
+                # Create normalized pair (alphabetically sorted)
+                pair = tuple(sorted([code1, code2]))
                 if pair not in pairs:
                     pairs.append(pair)
     
-    # Handle boundary between first and second group
-    if len(score_groups) > 1:
-        last_of_first = score_groups[0][-1]
-        first_of_second = score_groups[1][0]
-        if abs(last_of_first[1] - first_of_second[1]) < delta:
-            pair = tuple(sorted([last_of_first[0], first_of_second[0]]))
-            if pair not in pairs:
-                pairs.append(pair)
-    
-    # Handle second group (if multiple members)
-    if len(score_groups) > 1 and len(score_groups[1]) >= 2:
-        second_group = score_groups[1]
-        for i in range(len(second_group)):
-            for j in range(i + 1, len(second_group)):
-                pair = tuple(sorted([second_group[i][0], second_group[j][0]]))
-                if pair not in pairs:
-                    pairs.append(pair)
-    
-    # Handle boundary between second and third group (only if scores are exactly equal)
-    if len(score_groups) > 2:
-        last_of_second = score_groups[1][-1]
-        first_of_third = score_groups[2][0]
-        # Only compare if scores are exactly equal
-        if last_of_second[1] == first_of_third[1]:
-            pair = tuple(sorted([last_of_second[0], first_of_third[0]]))
-            if pair not in pairs:
-                pairs.append(pair)
-    
-    # Handle third group (if multiple members and all have same score as last of second group)
-    if len(score_groups) > 2 and len(score_groups[2]) >= 2:
-        # Only process if third group score equals second group score
-        if score_groups[1][-1][1] == score_groups[2][0][1]:
-            third_group = score_groups[2]
-            for i in range(len(third_group)):
-                for j in range(i + 1, len(third_group)):
-                    pair = tuple(sorted([third_group[i][0], third_group[j][0]]))
-                    if pair not in pairs:
-                        pairs.append(pair)
-
     return pairs
 
 
 def get_next_tie_breaker_question_for_pairs(active_pairs):
     """
     Get the next tie-breaker question for active pairs.
-    Returns a single question for the first active pair that needs one.
+    Returns a single question for the FIRST active pair that needs one.
     """
     # Create lookup mapping of normalized pair -> list of questions
     pair_map = {}
@@ -210,15 +165,17 @@ def get_next_tie_breaker_question_for_pairs(active_pairs):
         p = q.get('pair', '')
         if not p:
             continue
-        # Store questions for both pair orders (A-B and B-A)
-        pair_map.setdefault(p, []).append(q)
-        rev = '-'.join(reversed(p.split('-')))
-        if rev != p:  # Avoid duplicating if pair is symmetric
-            pair_map.setdefault(rev, []).append(q)
-
+        
+        # Normalize pair string (alphabetically sorted)
+        codes = p.split('-')
+        normalized = '-'.join(sorted(codes))
+        
+        pair_map.setdefault(normalized, []).append(q)
+    
     # Try to find a question for each active pair (in order)
     for pair in active_pairs:
-        pair_str = f"{pair[0]}-{pair[1]}"
+        # Normalize the pair tuple to string
+        pair_str = '-'.join(sorted([pair[0], pair[1]]))
         
         # Get questions for this pair
         candidate_questions = pair_map.get(pair_str, [])
@@ -229,12 +186,16 @@ def get_next_tie_breaker_question_for_pairs(active_pairs):
         # Check which questions haven't been asked yet for this pair
         asked_questions = set()
         for tq in session.get('tie_breaker_questions', []):
-            # Match by pair string (either direction)
+            # Get the normalized pair from the tie question
             tq_pair = tq.get('pair', '')
-            if tq_pair == pair_str or tq_pair == f"{pair[1]}-{pair[0]}":
-                # Track by original question number from TIE_BREAKER_QUESTIONS
-                original_num = tq.get('original_number', tq.get('number'))
-                asked_questions.add(original_num)
+            if tq_pair:
+                tq_codes = tq_pair.split('-')
+                tq_normalized = '-'.join(sorted(tq_codes))
+                
+                if tq_normalized == pair_str:
+                    # Track by original question number
+                    original_num = tq.get('original_number', tq.get('number'))
+                    asked_questions.add(original_num)
         
         # Find the first unasked question
         for question in candidate_questions:
@@ -243,10 +204,11 @@ def get_next_tie_breaker_question_for_pairs(active_pairs):
                 # Create a copy and mark with metadata
                 question_copy = deepcopy(question)
                 question_copy['original_number'] = original_num
-                question_copy['pair'] = pair_str  # Normalize to current pair string
+                question_copy['pair'] = pair_str  # Store normalized pair string
                 return question_copy, pair_str
 
     return None, None
+
 
 
 def assign_unique_number_to_tie_question(question):
@@ -298,6 +260,7 @@ def start_assessment():
 
 
 @app.route('/assessment')
+@app.route('/assessment')
 def assessment():
     # if session not initialized, redirect to index
     if 'current_question' not in session:
@@ -315,12 +278,12 @@ def assessment():
                                    total_questions=session.get('total_questions', len(QUESTIONS)),
                                    current_question=current_q)
         else:
-            # finished main questions -> evaluate
+            # Finished main questions -> evaluate for tie-breakers
             riasec_scores, _ = calculate_scores()
             active_pairs = select_tie_breaker_pairs(riasec_scores)
             
             if active_pairs:
-                # Remove completed pairs
+                # Remove already completed pairs
                 completed_pairs = session.get('completed_tie_pairs', [])
                 active_pairs = [pair for pair in active_pairs if pair not in completed_pairs]
                 
@@ -334,19 +297,55 @@ def assessment():
             # No active pairs or all pairs completed
             return redirect(url_for('submit_all_answers'))
 
-    # Tie-breaker phase
+    # Tie-breaker phase - KEY CHANGE: Re-evaluate after EVERY answer
     else:
-        # Check if we have active pairs
-        active_pairs = session.get('active_tie_pairs', [])
-        if not active_pairs:
+        # Recalculate scores to check current state
+        riasec_scores, _ = calculate_scores()
+        
+        # Re-evaluate which pairs still need tie-breaking (ONLY top 3)
+        all_potential_pairs = select_tie_breaker_pairs(riasec_scores)
+        
+        # Filter to only pairs that are still active and unresolved
+        still_active_pairs = []
+        completed_pairs = session.get('completed_tie_pairs', [])
+        
+        for pair in all_potential_pairs:
+            # Skip if already completed
+            if pair in completed_pairs:
+                continue
+            
+            pair_str = '-'.join(sorted([pair[0], pair[1]]))
+            
+            # Check if pair has reached max questions
+            if has_reached_max_questions_for_pair(pair_str):
+                # Mark as completed due to exhaustion
+                if pair not in completed_pairs:
+                    completed_pairs.append(pair)
+                continue
+            
+            # Check if tie is still unresolved (using < delta)
+            if needs_tie_breaker_for_pair(pair, riasec_scores):
+                still_active_pairs.append(pair)
+            else:
+                # Mark as completed due to resolution
+                if pair not in completed_pairs:
+                    completed_pairs.append(pair)
+        
+        session['active_tie_pairs'] = still_active_pairs
+        session['completed_tie_pairs'] = completed_pairs
+        session.modified = True
+        
+        if not still_active_pairs:
+            # All active pairs are resolved or exhausted
             return redirect(url_for('submit_all_answers'))
 
         # Get current tie-breaker questions
         tie_questions = session.get('tie_breaker_questions', [])
         tie_answered = session.get('tie_breaker_answered', 0)
 
+        # Check if we need to show an existing unanswered question
         if tie_answered < len(tie_questions):
-            # Show next tie-breaker question
+            # Show next unanswered tie-breaker question
             question = tie_questions[tie_answered]
             current_q_number = len(QUESTIONS) + tie_answered + 1
             return render_template('assessment.html',
@@ -354,72 +353,32 @@ def assessment():
                                    phase="tie_breaker",
                                    total_questions=session.get('total_questions', len(QUESTIONS) + len(tie_questions)),
                                    current_question=current_q_number)
+        
+        # Need to get next tie-breaker question (one at a time)
+        next_question, pair_str = get_next_tie_breaker_question_for_pairs(still_active_pairs)
+        
+        if next_question:
+            # Assign unique number and add to session
+            numbered_question = assign_unique_number_to_tie_question(next_question)
+            session['tie_breaker_questions'].append(numbered_question)
+            session['total_questions'] = len(QUESTIONS) + len(session['tie_breaker_questions'])
+            
+            # Update pair question count
+            update_pair_question_count(pair_str)
+            
+            session.modified = True
+            return redirect(url_for('assessment'))
         else:
-            # Need to get next tie-breaker question
-            riasec_scores, _ = calculate_scores()
-            
-            # Re-evaluate which pairs still need tie-breaking
-            all_potential_pairs = select_tie_breaker_pairs(riasec_scores)
-            
-            # Filter to only pairs that are still active and unresolved
-            still_active_pairs = []
-            completed_pairs = session.get('completed_tie_pairs', [])
-            
-            for pair in all_potential_pairs:
-                # Skip if already completed
-                if pair in completed_pairs:
-                    continue
-                
-                pair_str = f"{pair[0]}-{pair[1]}"
-                
-                # Check if pair has reached max questions
-                if has_reached_max_questions_for_pair(pair_str):
-                    # Mark as completed due to exhaustion
-                    if pair not in completed_pairs:
-                        completed_pairs.append(pair)
-                    continue
-                
-                # Check if tie is still unresolved
-                if needs_tie_breaker_for_pair(pair, riasec_scores):
-                    still_active_pairs.append(pair)
-                else:
-                    # Mark as completed due to resolution
-                    if pair not in completed_pairs:
-                        completed_pairs.append(pair)
-            
-            session['active_tie_pairs'] = still_active_pairs
+            # No more questions available for active pairs
+            # Mark remaining pairs as completed
+            for pair in still_active_pairs:
+                if pair not in completed_pairs:
+                    completed_pairs.append(pair)
             session['completed_tie_pairs'] = completed_pairs
             session.modified = True
-            
-            if not still_active_pairs:
-                # All active pairs are resolved or exhausted
-                return redirect(url_for('submit_all_answers'))
-
-            # Get next question for the first active pair (one at a time)
-            next_question, pair_str = get_next_tie_breaker_question_for_pairs(still_active_pairs)
-            
-            if next_question:
-                # Assign unique number and add to session
-                numbered_question = assign_unique_number_to_tie_question(next_question)
-                session['tie_breaker_questions'].append(numbered_question)
-                session['total_questions'] = len(QUESTIONS) + len(session['tie_breaker_questions'])
-                
-                # Update pair question count
-                update_pair_question_count(pair_str)
-                
-                session.modified = True
-                return redirect(url_for('assessment'))
-            else:
-                # No more questions available for active pairs
-                # Mark remaining pairs as completed
-                for pair in still_active_pairs:
-                    if pair not in completed_pairs:
-                        completed_pairs.append(pair)
-                session['completed_tie_pairs'] = completed_pairs
-                session.modified = True
-                return redirect(url_for('submit_all_answers'))
-
-
+            return redirect(url_for('submit_all_answers'))
+        
+        
 # --- Answer saving ---------------------------------------------------------------
 @app.route('/save_answer', methods=['POST'])
 def save_answer():

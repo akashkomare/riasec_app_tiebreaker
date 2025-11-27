@@ -1,11 +1,11 @@
-TIE_BREAKER_QUESTIONS = [
+TIE_BREAKER_QUESTIONS =[
   {
     "number": 31,
     "pair": "R-I",
     "question": "Which activity appeals to you more?",
     "options": {
-      "A": {"text": "Fixing or building something using tools", "riasec": "R"},
-      "B": {"text": "Analyzing data to understand a problem", "riasec": "I"}
+      "A": {"text": "Fix a tool or assemble simple equipment", "riasec": "R"},
+      "B": {"text": "Analyze information to understand a problem", "riasec": "I"}
     }
   },
   {
@@ -13,8 +13,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-I",
     "question": "Which task would you choose?",
     "options": {
-      "A": {"text": "Working with machines or equipment", "riasec": "R"},
-      "B": {"text": "Conducting research to find answers", "riasec": "I"}
+      "A": {"text": "Adjust mechanical parts to make them work", "riasec": "R"},
+      "B": {"text": "Research details to find clear explanations", "riasec": "I"}
     }
   },
 
@@ -23,8 +23,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-A",
     "question": "Which activity fits you better?",
     "options": {
-      "A": {"text": "Building or assembling physical objects", "riasec": "R"},
-      "B": {"text": "Creating an artistic design or concept", "riasec": "A"}
+      "A": {"text": "Assemble objects using hands-on techniques", "riasec": "R"},
+      "B": {"text": "Create visual concepts or artistic sketches", "riasec": "A"}
     }
   },
   {
@@ -32,8 +32,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-A",
     "question": "Which work would you prefer?",
     "options": {
-      "A": {"text": "Repairing mechanical items", "riasec": "R"},
-      "B": {"text": "Expressing ideas through creative art", "riasec": "A"}
+      "A": {"text": "Repair damaged items using tools", "riasec": "R"},
+      "B": {"text": "Design expressive artwork or creative layouts", "riasec": "A"}
     }
   },
 
@@ -42,8 +42,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-S",
     "question": "Which appeals to you more?",
     "options": {
-      "A": {"text": "Working independently on hands-on tasks", "riasec": "R"},
-      "B": {"text": "Helping others solve their problems", "riasec": "S"}
+      "A": {"text": "Complete tasks independently with practical work", "riasec": "R"},
+      "B": {"text": "Help someone understand or solve an issue", "riasec": "S"}
     }
   },
   {
@@ -51,8 +51,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-S",
     "question": "Which situation suits you?",
     "options": {
-      "A": {"text": "Using tools to complete practical work", "riasec": "R"},
-      "B": {"text": "Providing guidance or support to people", "riasec": "S"}
+      "A": {"text": "Use tools to finish hands-on tasks", "riasec": "R"},
+      "B": {"text": "Support people through guidance or advice", "riasec": "S"}
     }
   },
 
@@ -61,8 +61,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-E",
     "question": "Which would you rather do?",
     "options": {
-      "A": {"text": "Operate tools or machinery", "riasec": "R"},
-      "B": {"text": "Lead a team to achieve goals", "riasec": "E"}
+      "A": {"text": "Set up equipment for a task", "riasec": "R"},
+      "B": {"text": "Direct a team toward shared goals", "riasec": "E"}
     }
   },
   {
@@ -70,8 +70,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-E",
     "question": "Which role fits you more?",
     "options": {
-      "A": {"text": "Performing physical or mechanical tasks", "riasec": "R"},
-      "B": {"text": "Persuading others and influencing decisions", "riasec": "E"}
+      "A": {"text": "Carry out mechanical or physical activities", "riasec": "R"},
+      "B": {"text": "Persuade others and guide decisions", "riasec": "E"}
     }
   },
 
@@ -80,8 +80,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-C",
     "question": "Which activity do you prefer?",
     "options": {
-      "A": {"text": "Doing practical work involving tools", "riasec": "R"},
-      "B": {"text": "Organizing documents or structured information", "riasec": "C"}
+      "A": {"text": "Complete hands-on tasks requiring coordination", "riasec": "R"},
+      "B": {"text": "Organize files or structure information", "riasec": "C"}
     }
   },
   {
@@ -89,8 +89,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-C",
     "question": "Which type of work matches you?",
     "options": {
-      "A": {"text": "Repairing or assembling items", "riasec": "R"},
-      "B": {"text": "Following defined procedures accurately", "riasec": "C"}
+      "A": {"text": "Fix objects or assemble daily-use items", "riasec": "R"},
+      "B": {"text": "Follow set procedures accurately and clearly", "riasec": "C"}
     }
   },
 
@@ -99,8 +99,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-A",
     "question": "Which task interests you more?",
     "options": {
-      "A": {"text": "Solving scientific or analytical problems", "riasec": "I"},
-      "B": {"text": "Creating artistic or expressive work", "riasec": "A"}
+      "A": {"text": "Solve logical problems using analysis", "riasec": "I"},
+      "B": {"text": "Create expressive artwork or visual ideas", "riasec": "A"}
     }
   },
   {
@@ -108,8 +108,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-A",
     "question": "Which activity suits you better?",
     "options": {
-      "A": {"text": "Studying theories and concepts", "riasec": "I"},
-      "B": {"text": "Designing or developing creative content", "riasec": "A"}
+      "A": {"text": "Study theories to understand deeper concepts", "riasec": "I"},
+      "B": {"text": "Design creative content or imaginative visuals", "riasec": "A"}
     }
   },
 
@@ -118,8 +118,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-S",
     "question": "Which work style do you prefer?",
     "options": {
-      "A": {"text": "Researching complex ideas alone", "riasec": "I"},
-      "B": {"text": "Helping or teaching people", "riasec": "S"}
+      "A": {"text": "Research complex information independently", "riasec": "I"},
+      "B": {"text": "Teach or support people through guidance", "riasec": "S"}
     }
   },
   {
@@ -127,8 +127,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-S",
     "question": "What would you choose?",
     "options": {
-      "A": {"text": "Analyzing data or patterns", "riasec": "I"},
-      "B": {"text": "Working closely with people to support them", "riasec": "S"}
+      "A": {"text": "Analyze patterns to discover insights", "riasec": "I"},
+      "B": {"text": "Assist others in learning or growth", "riasec": "S"}
     }
   },
 
@@ -137,8 +137,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-E",
     "question": "Which activity feels more natural?",
     "options": {
-      "A": {"text": "Conducting analysis or experiments", "riasec": "I"},
-      "B": {"text": "Leading and influencing others", "riasec": "E"}
+      "A": {"text": "Conduct experiments to gather findings", "riasec": "I"},
+      "B": {"text": "Lead groups and motivate participants", "riasec": "E"}
     }
   },
   {
@@ -146,8 +146,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-E",
     "question": "What would you prefer?",
     "options": {
-      "A": {"text": "Working with data and theories", "riasec": "I"},
-      "B": {"text": "Taking charge of group tasks or decisions", "riasec": "E"}
+      "A": {"text": "Work with theories and numerical data", "riasec": "I"},
+      "B": {"text": "Take charge of decisions and planning", "riasec": "E"}
     }
   },
 
@@ -156,8 +156,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-C",
     "question": "Which activity appeals to you?",
     "options": {
-      "A": {"text": "Exploring scientific or technical ideas", "riasec": "I"},
-      "B": {"text": "Organizing structured information", "riasec": "C"}
+      "A": {"text": "Explore technical ideas or scientific topics", "riasec": "I"},
+      "B": {"text": "Organize structured or detailed information", "riasec": "C"}
     }
   },
   {
@@ -165,8 +165,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-C",
     "question": "Which task suits you more?",
     "options": {
-      "A": {"text": "Investigating and discovering new knowledge", "riasec": "I"},
-      "B": {"text": "Maintaining accuracy in data systems", "riasec": "C"}
+      "A": {"text": "Investigate concepts to gain deeper knowledge", "riasec": "I"},
+      "B": {"text": "Maintain accuracy in systems or records", "riasec": "C"}
     }
   },
 
@@ -175,8 +175,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-S",
     "question": "Which activity feels more engaging?",
     "options": {
-      "A": {"text": "Creating expressive or artistic materials", "riasec": "A"},
-      "B": {"text": "Supporting or counseling others", "riasec": "S"}
+      "A": {"text": "Create artistic work with imagination", "riasec": "A"},
+      "B": {"text": "Help people by offering thoughtful support", "riasec": "S"}
     }
   },
   {
@@ -184,8 +184,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-S",
     "question": "What interests you more?",
     "options": {
-      "A": {"text": "Working on creative projects", "riasec": "A"},
-      "B": {"text": "Helping people grow or improve", "riasec": "S"}
+      "A": {"text": "Work on creative or expressive projects", "riasec": "A"},
+      "B": {"text": "Assist individuals in personal improvement", "riasec": "S"}
     }
   },
 
@@ -194,8 +194,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-E",
     "question": "Which activity do you prefer?",
     "options": {
-      "A": {"text": "Expressing ideas through creativity", "riasec": "A"},
-      "B": {"text": "Leading or persuading others", "riasec": "E"}
+      "A": {"text": "Express ideas through creative designs", "riasec": "A"},
+      "B": {"text": "Lead or persuade others effectively", "riasec": "E"}
     }
   },
   {
@@ -203,8 +203,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-E",
     "question": "Which suits you more?",
     "options": {
-      "A": {"text": "Focusing on originality and artistic work", "riasec": "A"},
-      "B": {"text": "Making decisions and influencing people", "riasec": "E"}
+      "A": {"text": "Develop original artistic concepts", "riasec": "A"},
+      "B": {"text": "Motivate teams and direct initiatives", "riasec": "E"}
     }
   },
 
@@ -213,8 +213,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-C",
     "question": "Which environment fits you better?",
     "options": {
-      "A": {"text": "A flexible, creative workspace", "riasec": "A"},
-      "B": {"text": "A structured and organized setting", "riasec": "C"}
+      "A": {"text": "Work in flexible, creative settings", "riasec": "A"},
+      "B": {"text": "Work in structured, organized environments", "riasec": "C"}
     }
   },
   {
@@ -222,8 +222,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-C",
     "question": "Which task would you choose?",
     "options": {
-      "A": {"text": "Designing original creative work", "riasec": "A"},
-      "B": {"text": "Managing orderly information", "riasec": "C"}
+      "A": {"text": "Design original artwork or visual ideas", "riasec": "A"},
+      "B": {"text": "Organize tasks with clarity and structure", "riasec": "C"}
     }
   },
 
@@ -232,8 +232,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-E",
     "question": "Which role fits you more?",
     "options": {
-      "A": {"text": "Supporting people through guidance", "riasec": "S"},
-      "B": {"text": "Motivating or leading a group", "riasec": "E"}
+      "A": {"text": "Offer guidance or emotional support", "riasec": "S"},
+      "B": {"text": "Lead groups to achieve goals", "riasec": "E"}
     }
   },
   {
@@ -241,8 +241,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-E",
     "question": "Which activity appeals to you?",
     "options": {
-      "A": {"text": "Teaching or mentoring individuals", "riasec": "S"},
-      "B": {"text": "Convincing others to follow a plan", "riasec": "E"}
+      "A": {"text": "Mentor individuals needing personal help", "riasec": "S"},
+      "B": {"text": "Convince people to follow planned actions", "riasec": "E"}
     }
   },
 
@@ -251,8 +251,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-C",
     "question": "What work appeals to you more?",
     "options": {
-      "A": {"text": "Helping people with personal issues", "riasec": "S"},
-      "B": {"text": "Handling organized administrative tasks", "riasec": "C"}
+      "A": {"text": "Support people through meaningful interactions", "riasec": "S"},
+      "B": {"text": "Handle organized administrative responsibilities", "riasec": "C"}
     }
   },
   {
@@ -260,8 +260,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-C",
     "question": "Which task suits your style?",
     "options": {
-      "A": {"text": "Working with people to support them", "riasec": "S"},
-      "B": {"text": "Maintaining detailed records or systems", "riasec": "C"}
+      "A": {"text": "Assist people with everyday challenges", "riasec": "S"},
+      "B": {"text": "Maintain structured systems or detailed records", "riasec": "C"}
     }
   },
 
@@ -270,8 +270,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "E-C",
     "question": "Which activity suits you better?",
     "options": {
-      "A": {"text": "Leading initiatives and making decisions", "riasec": "E"},
-      "B": {"text": "Following structured workflows", "riasec": "C"}
+      "A": {"text": "Lead initiatives and organize team goals", "riasec": "E"},
+      "B": {"text": "Follow orderly workflows accurately", "riasec": "C"}
     }
   },
   {
@@ -279,19 +279,18 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "E-C",
     "question": "Which role do you prefer?",
     "options": {
-      "A": {"text": "Persuading others and directing actions", "riasec": "E"},
-      "B": {"text": "Organizing and maintaining detailed systems", "riasec": "C"}
+      "A": {"text": "Persuade groups and manage responsibilities", "riasec": "E"},
+      "B": {"text": "Organize tasks or keep systems updated", "riasec": "C"}
     }
   },
 
-  
   {
     "number": 61,
     "pair": "R-I",
     "question": "Which task would you enjoy more?",
     "options": {
-      "A": {"text": "Fixing a device by understanding its physical parts", "riasec": "R"},
-      "B": {"text": "Examining information to identify a hidden issue", "riasec": "I"}
+      "A": {"text": "Fix devices by adjusting physical components", "riasec": "R"},
+      "B": {"text": "Examine data to find hidden issues", "riasec": "I"}
     }
   },
   {
@@ -299,8 +298,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-A",
     "question": "Which activity sounds more appealing?",
     "options": {
-      "A": {"text": "Constructing or adjusting mechanical items", "riasec": "R"},
-      "B": {"text": "Creating visually appealing artwork or designs", "riasec": "A"}
+      "A": {"text": "Build or modify mechanical items", "riasec": "R"},
+      "B": {"text": "Create appealing artwork or illustrations", "riasec": "A"}
     }
   },
   {
@@ -308,8 +307,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-S",
     "question": "Which task fits you better?",
     "options": {
-      "A": {"text": "Working independently on practical tasks", "riasec": "R"},
-      "B": {"text": "Assisting people with hands-on help or support", "riasec": "S"}
+      "A": {"text": "Complete practical tasks independently", "riasec": "R"},
+      "B": {"text": "Help people with hands-on assistance", "riasec": "S"}
     }
   },
   {
@@ -317,8 +316,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-E",
     "question": "Which situation would you prefer?",
     "options": {
-      "A": {"text": "Solving a problem using tools or equipment", "riasec": "R"},
-      "B": {"text": "Taking initiative to guide a group toward a goal", "riasec": "E"}
+      "A": {"text": "Solve issues using tools or equipment", "riasec": "R"},
+      "B": {"text": "Direct teams toward shared objectives", "riasec": "E"}
     }
   },
   {
@@ -326,8 +325,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "R-C",
     "question": "Which option appeals more?",
     "options": {
-      "A": {"text": "Completing structured hands-on tasks", "riasec": "R"},
-      "B": {"text": "Working with organized systems or records", "riasec": "C"}
+      "A": {"text": "Perform structured hands-on tasks", "riasec": "R"},
+      "B": {"text": "Organize information with neat structure", "riasec": "C"}
     }
   },
   {
@@ -335,8 +334,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-A",
     "question": "What interests you more?",
     "options": {
-      "A": {"text": "Exploring scientific concepts through study or analysis", "riasec": "I"},
-      "B": {"text": "Expressing ideas by designing creative work", "riasec": "A"}
+      "A": {"text": "Explore scientific ideas through analysis", "riasec": "I"},
+      "B": {"text": "Design creative visuals or artistic work", "riasec": "A"}
     }
   },
   {
@@ -344,8 +343,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-S",
     "question": "Which activity feels more meaningful?",
     "options": {
-      "A": {"text": "Investigating complex topics in depth", "riasec": "I"},
-      "B": {"text": "Guiding or supporting individuals through understanding", "riasec": "S"}
+      "A": {"text": "Investigate topics to understand complexities", "riasec": "I"},
+      "B": {"text": "Support people through helpful guidance", "riasec": "S"}
     }
   },
   {
@@ -353,8 +352,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-E",
     "question": "Which do you enjoy more?",
     "options": {
-      "A": {"text": "Discovering insights from data or research", "riasec": "I"},
-      "B": {"text": "Presenting ideas confidently to influence others", "riasec": "E"}
+      "A": {"text": "Discover insights by analyzing data", "riasec": "I"},
+      "B": {"text": "Influence groups through confident communication", "riasec": "E"}
     }
   },
   {
@@ -362,8 +361,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "I-C",
     "question": "Which task fits you better?",
     "options": {
-      "A": {"text": "Examining technical or scientific material", "riasec": "I"},
-      "B": {"text": "Keeping information organized and accurate", "riasec": "C"}
+      "A": {"text": "Examine technical information for clarity", "riasec": "I"},
+      "B": {"text": "Keep documents accurate and consistent", "riasec": "C"}
     }
   },
   {
@@ -371,8 +370,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-S",
     "question": "Which role do you relate to more?",
     "options": {
-      "A": {"text": "Using creativity to express ideas", "riasec": "A"},
-      "B": {"text": "Helping people with personal growth", "riasec": "S"}
+      "A": {"text": "Use creativity to express new ideas", "riasec": "A"},
+      "B": {"text": "Help others improve personally or emotionally", "riasec": "S"}
     }
   },
   {
@@ -380,8 +379,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-E",
     "question": "What suits you better?",
     "options": {
-      "A": {"text": "Developing original concepts or works", "riasec": "A"},
-      "B": {"text": "Motivating teams toward shared goals", "riasec": "E"}
+      "A": {"text": "Develop fresh creative concepts regularly", "riasec": "A"},
+      "B": {"text": "Lead teams with confident direction", "riasec": "E"}
     }
   },
   {
@@ -389,8 +388,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "A-C",
     "question": "Which appeals more to you?",
     "options": {
-      "A": {"text": "Crafting imaginative or expressive creations", "riasec": "A"},
-      "B": {"text": "Organizing tasks with structure and precision", "riasec": "C"}
+      "A": {"text": "Craft expressive and original creations", "riasec": "A"},
+      "B": {"text": "Organize tasks using precise structure", "riasec": "C"}
     }
   },
   {
@@ -398,8 +397,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-E",
     "question": "Which situation sounds better?",
     "options": {
-      "A": {"text": "Supporting individuals by understanding their needs", "riasec": "S"},
-      "B": {"text": "Persuading or inspiring others to take action", "riasec": "E"}
+      "A": {"text": "Understand people's needs and support them", "riasec": "S"},
+      "B": {"text": "Motivate groups toward shared achievement", "riasec": "E"}
     }
   },
   {
@@ -407,8 +406,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "S-C",
     "question": "What type of role would you choose?",
     "options": {
-      "A": {"text": "Working closely with people to offer help", "riasec": "S"},
-      "B": {"text": "Maintaining structured information or systems", "riasec": "C"}
+      "A": {"text": "Assist people with meaningful guidance", "riasec": "S"},
+      "B": {"text": "Maintain well-organized records or systems", "riasec": "C"}
     }
   },
   {
@@ -416,10 +415,8 @@ TIE_BREAKER_QUESTIONS = [
     "pair": "E-C",
     "question": "Which activity describes you more?",
     "options": {
-      "A": {"text": "Leading plans and influencing team decisions", "riasec": "E"},
-      "B": {"text": "Organizing workflows and keeping processes clear", "riasec": "C"}
+      "A": {"text": "Lead plans and manage team direction", "riasec": "E"},
+      "B": {"text": "Organize workflows and ensure smooth processes", "riasec": "C"}
     }
   }
-
-
 ]
